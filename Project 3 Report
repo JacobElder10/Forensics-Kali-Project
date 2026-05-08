@@ -1,0 +1,106 @@
+Phase 3 Report
+
+Forensic Analysis Report – Phase 3  
+Windows 11 VM Investigation Using Kali Linux
+
+Overview
+
+In this phase, I analyzed the forensic evidence collected in Phase 2, including a disk image, memory dump, and network capture from a Windows 11 virtual machine. The goal was to identify suspicious activity, extract meaningful artifacts, and reconstruct what happened on the system.
+
+This phase represents the “analysis” stage of the investigation, where raw data is turned into a clear narrative of the incident.
+
+Evidence Summary
+
+The following evidence was analyzed:
+
+- Disk image: Windows 11 VM (`win11.img`)  
+- Memory dump: Active system RAM (`memdump.raw`)  
+- Network capture: Traffic during execution (`capture.pcap`)  
+
+All files were previously hashed using SHA256 during acquisition to ensure integrity. Chain of custody was maintained from Phase 2 through analysis.
+
+Tools and Methodology
+
+Disk Analysis
+- Tool used: Autopsy  
+- Purpose: Examine file system, recover deleted files, and review user activity  
+
+Memory Analysis
+- Tool used: Volatility 3  
+- Purpose: Identify running processes, network connections, and in-memory artifacts  
+
+Network Analysis
+- Tool used: Wireshark  
+- Purpose: Analyze packet-level traffic and detect suspicious communication  
+
+No deviations were made from standard forensic procedures. All analysis was performed on forensic copies, not original evidence.
+
+Findings and Interpretation
+
+Disk Image Findings
+- A suspicious executable named `update.exe` was located in the Downloads folder  
+- Deleted PowerShell script recovered from the Recycle Bin  
+- Browser history showed access to unfamiliar or suspicious download sources  
+
+These findings suggest user interaction with potentially malicious content.
+
+Memory Dump Findings
+- Process `update.exe` was actively running in memory  
+- Parent process identified as `explorer.exe`  
+- Active network connection to external IP: `185.222.202.11`  
+- Evidence of suspicious runtime behavior consistent with malware execution  
+
+This indicates the program was not only executed but remained active in memory.
+
+Network Capture Findings
+- Repeated HTTP POST requests observed  
+- Encoded data being transmitted outbound  
+- Consistent communication with a single external IP address  
+
+Timeline Reconstruction
+
+By correlating timestamps across disk, memory, and network data, the following sequence was reconstructed:
+
+- 14:32 → File `update.exe` downloaded to system  
+- 14:33 → User executes file  
+- 14:33 → Process appears in memory  
+- 14:34 → Network communication begins  
+
+This shows a very short time between execution and system compromise.
+
+
+Conclusion and Assessment
+
+The analysis confirms that the Windows 11 system was compromised following execution of a malicious file by the user.
+
+Key Evidence Supporting This Conclusion
+- Presence of suspicious executable on disk  
+- Active malicious process in memory  
+- External network communication to unknown IP  
+- Correlation of events across all evidence sources  
+
+What Happened
+The system was infected when the user executed `update.exe`, which initiated malicious activity including memory residency and external communication.
+
+What Would Be Next in a Real Investigation
+- Block associated IP addresses  
+- Perform full system reimaging  
+- Analyze malware sample in sandbox environment  
+- Investigate potential lateral movement in network  
+
+GitHub Update
+
+For version control and documentation, this phase was added to the repository under:
+
+- Phase 3 folder added  
+- Full forensic analysis report uploaded  
+- Supporting artifacts included (non-sensitive outputs only)  
+
+Commit message used:
+“Completed forensic analysis and timeline reconstruction for Phase 3”
+
+Final Summary
+
+This phase demonstrates how forensic evidence can be analyzed and correlated to reconstruct a full incident. By combining disk, memory, and network data, it was possible to clearly identify how the system was compromised and build a reliable timeline of events.
+
+This completes the analysis stage and prepares the investigation for final reporting in Phase 4.
