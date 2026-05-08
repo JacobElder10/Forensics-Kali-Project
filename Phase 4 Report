@@ -1,0 +1,141 @@
+Final Forensic Case Report – Phase 4  
+
+Overview
+
+This phase brings everything together from the previous stages into a complete forensic case report. After collecting and analyzing evidence in Phases 2 and 3, the goal here is to clearly explain what happened, how it happened, and what the evidence proves.
+
+This report is written in a professional format similar to what would be delivered to management, clients, or legal teams.
+
+Executive Summary
+
+A Windows 11 virtual machine was compromised after a user executed a suspicious file named `update.exe`. The investigation confirmed that this file acted as malware, leading to unauthorized system activity.
+
+Key findings include:
+- Execution of a malicious program by the user  
+- Evidence of active memory-based malware execution  
+- External network communication to a suspicious IP address  
+- Correlated evidence across disk, memory, and network sources  
+
+Conclusion: The system was successfully compromised through user interaction with a malicious file.
+
+Incident Overview
+
+Systems Involved
+- Windows 11 Virtual Machine (target system)
+- Kali Linux Virtual Machine (forensic workstation)
+
+Scope of Investigation
+The investigation covered:
+- Disk image analysis  
+- Memory forensics  
+- Network traffic analysis  
+
+Timeline Summary
+- File downloaded and executed by user  
+- Malware process established in memory  
+- Network communication initiated shortly after execution  
+
+Evidence Summary
+
+| Evidence Type | Description | Hash Status | Acquisition Tool |
+|--------------|-------------|-------------|------------------|
+| Disk Image | Full Windows 11 system image | Verified (SHA256) | dc3dd |
+| Memory Dump | Active system RAM capture | Verified (SHA256) | WinPMEM |
+| Network Capture | Traffic during execution | Verified (SHA256) | tcpdump |
+
+Chain of Custody
+All evidence was hashed at the time of acquisition and stored in an isolated forensic directory to ensure integrity and prevent tampering.
+
+Methodology
+
+The analysis was performed using standard forensic tools:
+
+- Autopsy → disk and file system analysis  
+- Volatility 3 → memory analysis and process inspection  
+- Wireshark → network traffic analysis  
+
+### Why These Tools Were Used
+Each tool covers a different layer of system behavior:
+- Disk tools show stored and deleted files  
+- Memory tools reveal active malware behavior  
+- Network tools show external communication  
+
+No modifications were made to original evidence files.
+
+Detailed Findings
+
+Disk Analysis
+- Found suspicious executable: `update.exe`  
+- Recovered deleted PowerShell script from Recycle Bin  
+- Evidence of user execution activity present in file system artifacts  
+
+Memory Analysis
+- Active process: `update.exe`  
+- Parent process: `explorer.exe`  
+- External connection to IP: `185.222.202.11`  
+- Evidence of hidden execution within system memory  
+
+Network Analysis
+- Repeated HTTP POST requests detected  
+- Encoded outbound data observed  
+- Consistent communication with a single external IP  
+
+This behavior is consistent with command-and-control (C2) activity.
+
+Timeline Reconstruction
+
+Time Event 
+14:32 File downloaded (`update.exe`)
+14:33 User executes file 
+14:33 Process appears in memory 
+14:34 Network communication begins 
+
+Conclusion and Assessment
+
+The investigation confirms that the Windows 11 system was compromised through execution of a malicious file.
+
+How the Compromise Occurred
+The user executed `update.exe`, which initiated malware behavior including memory residency and external communication.
+
+Evidence Supporting This Conclusion
+- Disk artifacts showing file presence and execution  
+- Memory evidence of active malicious process  
+- Network evidence of external communication  
+- Correlation across all evidence types  
+
+Recommended Actions (Real-World Context)
+- Isolate and reimage affected systems  
+- Block malicious IP addresses  
+- Investigate potential lateral movement  
+- Monitor for repeated indicators of compromise  
+
+Confidence Level
+High confidence due to consistent evidence across multiple independent sources.
+
+Appendices
+
+- SHA256 hash logs for all evidence  
+- Command history from Kali Linux  
+- Tool versions used (Autopsy, Volatility, Wireshark)  
+- Screenshots of key findings (if included in submission)  
+
+Final Summary
+
+This project demonstrates a complete forensic lifecycle:
+
+- Environment setup (Phase 1)  
+- Evidence acquisition (Phase 2)  
+- Technical analysis and correlation (Phase 3)  
+- Formal reporting and communication (Phase 4)  
+
+The investigation shows how combining disk, memory, and network evidence allows for a clear reconstruction of system compromise events.
+
+GitHub Submission Requirements
+
+This phase is stored in the repository under:
+
+- Phase 4 folder  
+- Final forensic report uploaded  
+- Presentation slides included (if required)  
+
+Commit history reflects structured updates throughout the investigation process.
