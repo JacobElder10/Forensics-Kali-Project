@@ -1,0 +1,72 @@
+Phase 1 Report
+
+Initial Forensics Project Report  
+Kali Linux Setup, Tools, and GitHub Version Control
+
+Overview
+
+This project focuses on building the foundation for a digital forensics lab using Kali Linux. The goal was to set up a working forensic environment, identify the tools needed for investigations, and learn how to properly track and store work using GitHub version control.
+
+Kali Linux Setup Plan
+
+I chose to install Kali Linux locally using VMware Workstation on my personal computer. I went with a local virtual machine instead of a cloud option because it gives me more direct control over the system, especially when working with disk images, memory dumps, and network traffic in later phases.
+
+Setup Steps Included:
+- Enabling virtualization in BIOS
+- Downloading the Kali Linux ISO
+- Creating a virtual machine in VMware
+- Allocating CPU, RAM, and storage resources
+- Installing Kali Linux and updating system packages
+
+After installation, I updated all packages and installed essential forensic tools to prepare the system for investigation work.
+
+Forensic Tools Selected
+
+To prepare for digital forensic tasks, I grouped tools into categories based on their function:
+
+Disk Forensics
+- Autopsy – used for analyzing file systems and recovering deleted files  
+- Sleuth Kit – command-line tools for deeper file system investigation  
+
+Memory Forensics
+- Volatility 3 – used to analyze RAM and identify running processes or hidden malware  
+- WinPMEM – used to capture memory from Windows systems  
+
+Network Forensics
+- Wireshark – used to inspect network packets and traffic patterns  
+- tcpdump – used to capture network traffic from the command line  
+
+Why These Tools
+These tools were chosen because they cover the three core areas of forensics: disk, memory, and network analysis. Together, they allow a complete investigation of system activity and potential compromises.
+
+Evidence Strategy
+
+The plan for handling digital evidence is based on standard forensic practices:
+
+- Create bit-by-bit disk images instead of modifying original data  
+- Capture memory while the system is running to preserve live activity  
+- Record network traffic during simulated events  
+- Use hashing (SHA256) to verify data integrity  
+- Maintain chain of custody for all collected evidence  
+
+This ensures that any evidence collected remains reliable and defensible.
+
+GitHub and Version Control
+
+To track all project work, I used GitHub for version control.
+
+Steps Completed:
+- Created a GitHub account and repository named `Forensics-Kali-Project`  
+- Installed Git on my system  
+- Initialized a local repository for the project files  
+- Added the Initial Proposal document  
+- Made a clear initial commit  
+- Pushed the project to GitHub  
+
+This setup allows all changes to be tracked over time and ensures that my work is properly documented and easy to review.
+
+Conclusion
+
+This phase focused on building the foundation for a forensic investigation environment. I successfully set up Kali Linux, selected key forensic tools, and implemented version control using GitHub.
+
+At this stage, I am prepared to move forward into hands-on forensic work, including evidence acquisition and analysis in the next phases of the project.
