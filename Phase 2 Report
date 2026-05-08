@@ -1,0 +1,50 @@
+Phase 2 report
+
+Forensic Acquisition Report – Phase 2  
+Windows 11 Virtual Machine Forensic Data Collection Using Kali Linux
+
+Overview
+
+In this phase, I moved from planning into hands-on forensic work. The goal was to collect real forensic evidence from a controlled Windows 11 virtual machine using Kali Linux as the investigation tool.
+
+This phase focused on setting up a target system, acquiring evidence (disk, memory, and network data), and properly documenting everything so it could be analyzed in later phases.
+
+
+Target System Setup
+
+Platform
+Local virtual machine (VMware Workstation)
+
+Operating System
+Windows 11 Pro
+
+Purpose of Target
+The Windows 11 VM was configured as a simulated user workstation. A basic “incident” was created by executing a suspicious file (`update.exe`) to simulate malware behavior and generate forensic artifacts.
+
+
+Acquisition Plan
+
+The plan was to collect three main types of forensic evidence:
+
+- Disk image of the Windows 11 system  
+- Memory dump from the active running system  
+- Network traffic during simulated execution  
+
+Tools Selected (from Phase 1)
+- dc3dd → disk imaging  
+- WinPMEM → memory acquisition  
+- tcpdump → network capture  
+- Autopsy / Volatility → later analysis tools  
+
+These tools were chosen because they cover the three core areas of digital forensics: disk, memory, and network activity.
+
+
+Evidence Acquisition Process
+
+1. Disk Imaging
+
+The first step was creating a bit-for-bit copy of the Windows 11 virtual disk.
+
+Command used:
+```bash
+sudo dc3dd if=/dev/sda of=/evidence/win11.img hash=sha256
